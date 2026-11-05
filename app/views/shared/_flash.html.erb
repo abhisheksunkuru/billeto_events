@@ -1,0 +1,11 @@
+<div id="flash-messages">
+  <% if defined?(alert) && alert.present? %>
+    <p class="alert" style="color: #dc3545; background: #f8d7da; border: 1px solid #f5c6cb; padding: 0.75rem 1.25rem; border-radius: 4px; margin: 1rem 2rem;">
+      <%= alert %>
+    </p>
+  <% elsif defined?(notice) && notice.present? %>
+    <p class="notice" style="color: #155724; background: #d4edda; border: 1px solid #c3e6cb; padding: 0.75rem 1.25rem; border-radius: 4px; margin: 1rem 2rem;">
+      <%= notice %>
+    </p>
+  <% end %>
+</div>

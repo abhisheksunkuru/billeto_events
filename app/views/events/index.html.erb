@@ -1,0 +1,24 @@
+<div class="events-container">
+  <h1>Public Events</h1>
+
+  <div class="events-grid">
+    <% @events.each do |event| %>
+      <div class="event-card" id="event-<%= event.id %>">
+        <% if event.image_url.present? %>
+          <img src="<%= event.image_url %>" alt="<%= event.title %>" class="event-thumb" />
+        <% end %>
+        
+        <h2><%= event.title %></h2>
+        <p class="date"><%= event.start_date&.strftime("%B %d, %Y %H:%M") %></p>
+        <p class="description"><%= truncate(strip_tags(event.description), length: 140) %></p>
+        
+        <div class="voting-controls">
+          <span class="total-score">Total Votes: <strong><%= event.score %></strong> (+<%= event.upvotes_count %> / -<%= event.downvotes_count %>)</span>
+          
+          <%= button_to "▲ Upvote", upvote_event_path(event), method: :post, class: "btn-vote upvote-btn" %>
+          <%= button_to "▼ Downvote", downvote_event_path(event), method: :post, class: "btn-vote downvote-btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

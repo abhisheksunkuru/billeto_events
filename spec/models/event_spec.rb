@@ -34,6 +34,17 @@ RSpec.describe Event, type: :model do
       expect(duplicate).not_to be_valid
       expect(duplicate.errors[:external_id]).to include("has already been taken")
     end
+
+    it "validates that end_date is after start_date" do
+      event = Event.new(
+        title: "Conference",
+        external_id: "conf-1",
+        start_date: 2.days.from_now,
+        end_date: 1.day.from_now
+      )
+      expect(event).not_to be_valid
+      expect(event.errors[:end_date]).to include("must be after the start date")
+    end
   end
 
   describe "#score" do
